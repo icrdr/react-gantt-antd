@@ -1,0 +1,49 @@
+.rt-element {
+  $height: $react-timelines-track-height - 2 * $react-timelines-element-spacing;
+
+  position: relative;
+  height: $height;
+  line-height: $height;
+  text-align: center;
+}
+
+.rt-element__content {
+  padding: 0 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rt-element__tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  z-index: 2;
+  padding: 10px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-align: left;
+  background: $react-timelines-text-color;
+  color: white;
+  transform: translateX(-50%) scale(0);
+  pointer-events: none;
+
+  &::before {
+    $size: 6px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-top: $size solid $react-timelines-text-color;
+    border-right: $size solid transparent;
+    border-left: $size solid transparent;
+    transform: translateX(-50%);
+    content: ' ';
+  }
+}
+
+.rt-element:hover > .rt-element__tooltip,
+.rt-element:focus > .rt-element__tooltip {
+  $delay: 0.3s;
+  transform: translateX(-50%) scale(1);
+  transition: transform 0s $delay;
+}

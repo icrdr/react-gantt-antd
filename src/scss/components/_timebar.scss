@@ -1,0 +1,25 @@
+.rt-timebar {
+  background-color: $react-timelines-timebar-cell-background-color;
+  font-weight: 500;
+}
+
+.rt-timebar__row {
+  position: relative;
+  height: $react-timelines-header-row-height + $react-timelines-border-width;
+  overflow: hidden;
+  line-height: $react-timelines-header-row-height;
+  border-bottom: $react-timelines-border-width solid $react-timelines-keyline-color;
+  &:last-child {
+    border-bottom-color: $react-timelines-header-separator-color;
+  }
+}
+
+.rt-timebar__cell {
+  position: absolute;
+  text-align: center;
+  background-color: $react-timelines-timebar-cell-background-color;
+  border-left: 1px solid $react-timelines-keyline-color;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

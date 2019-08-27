@@ -1,0 +1,70 @@
+// Common
+$react-timelines-spacing: 10px;
+$react-timelines-keyline-color: rgb(232, 232, 232) !default;
+$react-timelines-separator-dark-color: rgb(232, 232, 232) !default;
+
+$react-timelines-auto-open-breakpoint: 1000px !default;
+$react-timelines-font-family: sans-serif !default;
+$react-timelines-border-width: 1px !default;
+$react-timelines-text-color: #4c4c4c !default;
+
+// Header
+$react-timelines-header-row-height: 40px !default;
+$react-timelines-header-separator-color: $react-timelines-separator-dark-color !default;
+
+// Sidebar
+$react-timelines-sidebar-width: 240px !default;
+$react-timelines-sidebar-closed-offset: 40px;
+$react-timelines-sidebar-background-color: #fff !default;
+$react-timelines-sidebar-separator-color: $react-timelines-keyline-color !default;
+$react-timelines-sidebar-key-indent-width: 20px !default;
+$react-timelines-sidebar-key-icon-size: 16px !default;
+$react-timelines-sidebar-key-icon-hover-color: #eee !default;
+
+// Timebar
+$react-timelines-timebar-cell-background-color: #fafafa;
+
+// Track / Elements
+$react-timelines-track-height: 60px !default;
+$react-timelines-element-spacing: $react-timelines-spacing !default;
+
+// Markers
+$react-timelines-marker-line-width: 2px !default;
+$react-timelines-marker-now-background-color: #bbb !default;
+$react-timelines-marker-pointer-background-color: #1890ff !default;
+$react-timelines-marker-line-transparency: 0.5 !default;
+
+// Controls
+$react-timelines-button-background-color: #fff !default;
+$react-timelines-button-background-color-hover: #f0f0f0 !default;
+$react-timelines-button-size: 44px !default;
+
+$react-feather-color: #1890ff !default;
+.rt {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  font-family: $react-timelines-font-family;
+  color: $react-timelines-text-color;
+  font-size: 14px;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@import 'utils';
+
+@import 'components/controls';
+@import 'components/element';
+@import 'components/grid';
+@import 'components/layout';
+@import 'components/marker';
+@import 'components/sidebar';
+@import 'components/timebar';
+@import 'components/timebar-key';
+@import 'components/timeline';
+@import 'components/track';
+@import 'components/tracks';
+@import 'components/track-key';
+@import 'components/track-keys';

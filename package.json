@@ -1,0 +1,98 @@
+{
+  "name": "react-gantt-antd",
+  "version": "1.0.3",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib coverage",
+    "build:js": "babel src/ -d lib/",
+    "watch:js": "babel -w src/ -d lib/",
+    "build:css": "node-sass src/scss/style.scss lib/css/style.css",
+    "watch:css": "node-sass -w src/scss/style.scss lib/css/style.css",
+    "watch": "npm run watch:js & npm run watch:css",
+    "build": "npm run clean && npm run build:js && npm run build:css",
+    "test": "npm run lint && npm run unit",
+    "lint": "npm run lint:prettier && npm run lint:js",
+    "lint:js": "eslint . --ext .js,.jsx",
+    "lint:js:fix": "eslint . --ext .js,.jsx --fix",
+    "lint:prettier": "prettier --list-different \"{e2e,src}/**/*.{js,jsx}\"",
+    "lint:prettier:fix": "prettier --write \"{e2e,src}/**/*.{js,jsx}\"",
+    "unit": "jest",
+    "coverage": "jest --coverage --collectCoverageFrom='**/*.{js,jsx}'",
+    "prepublish": "npm run clean && npm run build",
+    "demo:deploy": "./demo/ops/deploy.sh"
+  },
+  "keywords": [
+    "timeline",
+    "schedule",
+    "history",
+    "react",
+    "gantt",
+    "horizontal",
+    "library",
+    "scroll",
+    "scss",
+    "sass",
+    "tracks",
+    "time"
+  ],
+  "repository": "",
+  "author": "icrdr",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.23.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "jest": "^24.8.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "react": "^16.8.6",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "jest": {
+    "rootDir": "./src",
+    "resetMocks": true,
+    "resetModules": true,
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/utils/raf.js",
+      "<rootDir>/utils/events.js",
+      "<rootDir>/utils/computedStyle.js",
+      "<rootDir>/propTypes.js"
+    ],
+    "setupFiles": [
+      "../jestSetup.js"
+    ]
+  }
+}

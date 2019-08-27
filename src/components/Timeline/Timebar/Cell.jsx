@@ -1,0 +1,21 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Cell = ({ time, title, start, end, style }) => (
+  <div className="rt-timebar__cell" style={{
+    ...time.toStyleLeftAndWidth(start, end),
+    ...style
+  }}>
+    {title}
+  </div>
+)
+
+Cell.propTypes = {
+  time: PropTypes.shape({}),
+  title: PropTypes.string.isRequired,
+  start: PropTypes.instanceOf(Date).isRequired,
+  end: PropTypes.instanceOf(Date).isRequired,
+  style: PropTypes.shape({}),
+}
+
+export default Cell
