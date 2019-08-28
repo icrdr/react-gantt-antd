@@ -2,15 +2,16 @@ import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Header from './Header'
-import Body from './Body'
 import NowMarker from './Marker/Now'
 import PointerMarker from './Marker/Pointer'
 import getMouseX from '../../utils/getMouseX'
 import { globalContext } from '../../index'
+import Tracks from './Tracks'
+import Grid from './Grid'
 
 const Timeline = props => {
   const { sticky } = props
-  const { now, time } = useContext(globalContext)
+  const { now, time, tracks } = useContext(globalContext)
 
   const [pointerDate, setPointerDate] = useState(null)
   const [pointerVisible, setPointerVisible] = useState(false)
@@ -41,10 +42,12 @@ const Timeline = props => {
         onLeave={handleMouseLeave}
         sticky={sticky}
       />
-      <Body />
+      <div className="rt-timeline__body">
+        <Grid />
+        <Tracks tracks={tracks} />
+      </div>
     </div>
   )
-
 }
 
 Timeline.propTypes = {

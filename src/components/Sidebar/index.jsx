@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import Header from './Header'
-import Body from './Body'
+import TrackKeys from './TrackKeys'
+import { globalContext } from '../../index'
 
-const Sidebar = ({ toggleTrackOpen, sticky, clickTrackButton }) => (
-  <div className="rt-sidebar">
-    <Header sticky={sticky} />
-    <Body toggleTrackOpen={toggleTrackOpen} clickTrackButton={clickTrackButton} />
-  </div>
-)
+const Sidebar = ({ sticky }) => {
+  const { tracks } = useContext(globalContext)
+  return (
+    <div className="rt-sidebar">
+      <Header sticky={sticky} />
+      <div className="rt-sidebar__body">
+        <TrackKeys tracks={tracks} />
+      </div>
+    </div>
+  )
+}
 
 Sidebar.propTypes = {
-  toggleTrackOpen: PropTypes.func,
   sticky: PropTypes.shape({}),
-  clickTrackButton: PropTypes.func,
 }
 
 export default Sidebar

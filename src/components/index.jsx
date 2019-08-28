@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import Sidebar from '../Sidebar'
-import Timeline from '../Timeline'
-import { addListener, removeListener } from '../../utils/events'
-import raf from '../../utils/raf'
-import getNumericPropertyValue from '../../utils/getNumericPropertyValue'
+import Sidebar from './Sidebar'
+import Timeline from './Timeline'
+import { addListener, removeListener } from '../utils/events'
+import raf from '../utils/raf'
+import getNumericPropertyValue from '../utils/getNumericPropertyValue'
 
 const noop = () => { }
 
@@ -126,10 +126,8 @@ class Layout extends PureComponent {
   render() {
     const {
       isOpen,
-      toggleTrackOpen,
       sidebarWidth,
       timelineViewportWidth,
-      clickTrackButton,
     } = this.props
 
     const { isSticky, headerHeight, scrollLeft } = this.state
@@ -137,9 +135,7 @@ class Layout extends PureComponent {
       <div className={`rt-layout ${isOpen ? 'rt-is-open' : ''}`} ref={this.layout}>
         <div className="rt-layout__side" ref={this.sidebar}>
           <Sidebar
-            toggleTrackOpen={toggleTrackOpen}
             sticky={{ isSticky, headerHeight, sidebarWidth }}
-            clickTrackButton={clickTrackButton}
           />
         </div>
         <div className="rt-layout__main">
@@ -165,12 +161,10 @@ Layout.propTypes = {
   enableSticky: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool,
   time: PropTypes.shape({}).isRequired,
-  toggleTrackOpen: PropTypes.func,
   scrollToNow: PropTypes.bool,
   onLayoutChange: PropTypes.func.isRequired,
   sidebarWidth: PropTypes.number,
   timelineViewportWidth: PropTypes.number,
-  clickTrackButton: PropTypes.func,
 }
 
 export default Layout

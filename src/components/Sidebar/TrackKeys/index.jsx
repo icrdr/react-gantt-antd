@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import TrackKey from './TrackKey'
 
-const TrackKeys = ({ tracks, toggleOpen, clickTrackButton }) => {
+const TrackKeys = ({ tracks }) => {
   return (
     <ul className="rt-track-keys">
       {tracks.map(track => (
-        <TrackKey key={track.id} track={track} toggleOpen={toggleOpen} clickTrackButton={clickTrackButton} />
+        <TrackKey key={track.id} track={track} />
       ))}
     </ul>
   )
@@ -15,8 +15,6 @@ const TrackKeys = ({ tracks, toggleOpen, clickTrackButton }) => {
 
 TrackKeys.propTypes = {
   tracks: PropTypes.arrayOf(PropTypes.shape({})),
-  toggleOpen: PropTypes.func,
-  clickTrackButton: PropTypes.func,
 }
 
 export default TrackKeys

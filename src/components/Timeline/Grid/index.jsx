@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { globalContext } from '../../../index'
 import getGrid from '../../../utils/getGrid'
+
 const Grid = () => {
   const { time, timebar } = useContext(globalContext)
   const grid = getGrid(timebar)

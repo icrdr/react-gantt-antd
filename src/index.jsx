@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import Layout from './components/Layout'
+import Layout from './components'
 import createTime from './utils/time'
 
 export const globalContext = React.createContext();
@@ -124,17 +124,15 @@ function Gantt({
 
   return (
     <div className="rt">
-      <globalContext.Provider value={{ now, headWidth, tracks, time, clickElement, timebar }}>
+      <globalContext.Provider value={{ toggleTrackOpen, clickTrackButton, now, headWidth, tracks, time, clickElement, timebar }}>
         <Layout
           enableSticky={enableSticky}
           time={time}
-          toggleTrackOpen={toggleTrackOpen}
           scrollToNow={scrollToNow}
           isOpen={isOpen}
           onLayoutChange={handleLayoutChange}
           timelineViewportWidth={timelineViewportWidth}
           sidebarWidth={sidebarWidth}
-          clickTrackButton={clickTrackButton}
         />
       </globalContext.Provider>
     </div>
