@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import Marker from '.'
-import { globalContext } from '../../../index'
+import { globalContext } from '../../index'
 
 
 const NowMarker = ({ visible }) => {

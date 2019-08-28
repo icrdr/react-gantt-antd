@@ -1,7 +1,23 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { globalContext } from '../../../index'
-import Row from './Row'
+import { globalContext } from '../../index'
+
+const Cell = ({ time, title, start, end, style }) => (
+  <div className="rt-timebar__cell" style={{
+    ...time.toStyleLeftAndWidth(start, end),
+    ...style
+  }}>
+    {title}
+  </div>
+)
+
+const Row = ({ time, cells, style }) => (
+  <div className="rt-timebar__row" style={style}>
+    {cells.map(cell => (
+      <Cell key={cell.id} time={time} {...cell} />
+    ))}
+  </div>
+)
 
 const Timebar = ({ rows }) => {
   const { time } = useContext(globalContext)

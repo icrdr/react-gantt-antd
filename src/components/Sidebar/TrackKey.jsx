@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import TrackKeys from '.'
-import { globalContext } from '../../../index'
+import TrackKeys from './TrackKeys'
+import { globalContext } from '../../index'
 const TrackKey = ({ track }) => {
   const { clickTrackButton, toggleTrackOpen } = useContext(globalContext)
   const { title, tracks, isOpen, hasButton, sideComponent } = track

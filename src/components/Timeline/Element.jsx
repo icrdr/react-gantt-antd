@@ -2,8 +2,8 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import BasicElement from '../../Elements/Basic'
-import { globalContext } from '../../../index'
+import BasicElement from './Elements'
+import { globalContext } from '../../index'
 const Element = props => {
   const { index, time, style, styleBase, title, start, end, classes, dataSet, tooltip, clickElement } = props
 

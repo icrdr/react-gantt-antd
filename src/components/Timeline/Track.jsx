@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { globalContext } from '../../../index'
-import Tracks from '.'
+import { globalContext } from '../../index'
+import Tracks from './Tracks'
 import Element from './Element'
 
 const Track = ({ elements, isOpen, tracks }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import Layout from './components'
+import Layout from './components/Layout'
 import createTime from './utils/time'
 
 export const globalContext = React.createContext();

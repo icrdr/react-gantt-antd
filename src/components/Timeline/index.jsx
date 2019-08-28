@@ -2,17 +2,17 @@ import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Header from './Header'
-import NowMarker from './Marker/Now'
-import PointerMarker from './Marker/Pointer'
+import NowMarker from './Now'
+import PointerMarker from './Pointer'
 import getMouseX from '../../utils/getMouseX'
 import { globalContext } from '../../index'
 import Tracks from './Tracks'
-import Grid from './Grid'
+import getGrid from '../../utils/getGrid'
 
 const Timeline = props => {
   const { sticky } = props
-  const { now, time, tracks } = useContext(globalContext)
-
+  const { now, time, tracks, timebar } = useContext(globalContext)
+  const grid = getGrid(timebar)
   const [pointerDate, setPointerDate] = useState(null)
   const [pointerVisible, setPointerVisible] = useState(false)
   const [pointerHighlighted, setPointerHighlighted] = useState(false)
@@ -43,7 +43,11 @@ const Timeline = props => {
         sticky={sticky}
       />
       <div className="rt-timeline__body">
-        <Grid />
+        <div className="rt-grid">
+          {grid.map(({ id, start, end }) => (
+            <div key={id} className="rt-grid__cell" style={time.toStyleLeftAndWidth(start, end)} />
+          ))}
+        </div>
         <Tracks tracks={tracks} />
       </div>
     </div>

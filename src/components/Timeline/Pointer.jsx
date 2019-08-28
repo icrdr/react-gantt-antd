@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { getDayMonth } from '../../../utils/formatDate'
-import { globalContext } from '../../../index'
-import Marker from '.'
+import { getDayMonth } from '../../utils/formatDate'
+import { globalContext } from '../../index'
+import Marker from './Marker'
 
 const PointerMarker = ({ date, visible, highlighted }) => {
   const { time } = useContext(globalContext)
