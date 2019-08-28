@@ -1,23 +1,18 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-
+import { globalContext } from '../../index'
 import Tracks from './Tracks'
 import Grid from './Grid'
 
 
-const Body = ({ grid, clickElement }) => {
-
+const Body = () => {
+  const { tracks } = useContext(globalContext)
   return (
     <div className="rt-timeline__body">
-      {grid && <Grid grid={grid} />}
-      <Tracks clickElement={clickElement} />
+      <Grid />
+      <Tracks tracks={tracks} />
     </div>
   )
-}
-
-Body.propTypes = {
-  grid: PropTypes.arrayOf(PropTypes.shape({})),
-  clickElement: PropTypes.func,
 }
 
 export default Body

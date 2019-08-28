@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-
-const Header = ({ timebar, sticky: { isSticky, sidebarWidth, headerHeight } = {} }) => (
-  <div style={isSticky ? { paddingTop: headerHeight } : {}}>
-    <div
-      className={`rt-sidebar__header ${isSticky ? 'rt-is-sticky' : ''}`}
-      style={isSticky ? { width: sidebarWidth } : {}}
-    >
-      {timebar.map(({ id, title }) => (
-        <div key={id} className="rt-timebar-key">
-          {title}
-        </div>
-      ))}
+import { globalContext } from '../../index'
+const Header = ({ sticky: { isSticky, sidebarWidth, headerHeight } = {} }) => {
+  const { timebar } = useContext(globalContext)
+  return (
+    <div style={isSticky ? { paddingTop: headerHeight } : {}}>
+      <div
+        className={`rt-sidebar__header ${isSticky ? 'rt-is-sticky' : ''}`}
+        style={isSticky ? { width: sidebarWidth } : {}}
+      >
+        {timebar.map(({ id, title }) => (
+          <div key={id} className="rt-timebar-key">
+            {title}
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 Header.propTypes = {
   sticky: PropTypes.shape({
@@ -22,12 +25,6 @@ Header.propTypes = {
     headerHeight: PropTypes.number.isRequired,
     sidebarWidth: PropTypes.number.isRequired,
   }),
-  timebar: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string,
-    }).isRequired
-  ).isRequired,
 }
 
 export default Header

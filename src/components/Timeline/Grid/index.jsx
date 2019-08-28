@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { globalContext } from '../../../index'
-
-const Grid = ({ grid }) => {
-  const { time } = useContext(globalContext)
+import getGrid from '../../../utils/getGrid'
+const Grid = () => {
+  const { time, timebar } = useContext(globalContext)
+  const grid = getGrid(timebar)
   return (
     <div className="rt-grid">
       {grid.map(({ id, start, end }) => (
@@ -11,15 +12,6 @@ const Grid = ({ grid }) => {
       ))}
     </div>
   )
-}
-
-Grid.propTypes = {
-  grid: PropTypes.arrayOf(
-    PropTypes.shape({
-      start: PropTypes.instanceOf(Date).isRequired,
-      end: PropTypes.instanceOf(Date).isRequired,
-    })
-  ).isRequired,
 }
 
 export default Grid

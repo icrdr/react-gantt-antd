@@ -1,21 +1,19 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { globalContext } from '../../../index'
 import Track from './Track'
 
-const Tracks = ({ clickElement }) => {
-  const { tracks } = useContext(globalContext)
+const Tracks = ({ tracks }) => {
   return (
     <div className="rt-tracks">
       {tracks.map(({ id, elements, isOpen, tracks: children }) => (
-        <Track key={id} elements={elements} isOpen={isOpen} tracks={children} clickElement={clickElement} />
+        <Track key={id} elements={elements} isOpen={isOpen} tracks={children} />
       ))}
     </div>
   )
 }
 
 Tracks.propTypes = {
-  clickElement: PropTypes.func,
+  tracks: PropTypes.arrayOf(PropTypes.shape({})),
 }
 
 export default Tracks

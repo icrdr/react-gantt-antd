@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import TrackKey from './TrackKey'
 
 const TrackKeys = ({ tracks, toggleOpen, clickTrackButton }) => {
-  console.log(tracks)
   return (
     <ul className="rt-track-keys">
       {tracks.map(track => (

@@ -124,10 +124,9 @@ function Gantt({
 
   return (
     <div className="rt">
-      <globalContext.Provider value={{ now, headWidth, tracks, time }}>
+      <globalContext.Provider value={{ now, headWidth, tracks, time, clickElement, timebar }}>
         <Layout
           enableSticky={enableSticky}
-          timebar={timebar}
           time={time}
           toggleTrackOpen={toggleTrackOpen}
           scrollToNow={scrollToNow}
@@ -135,7 +134,6 @@ function Gantt({
           onLayoutChange={handleLayoutChange}
           timelineViewportWidth={timelineViewportWidth}
           sidebarWidth={sidebarWidth}
-          clickElement={clickElement}
           clickTrackButton={clickTrackButton}
         />
       </globalContext.Provider>

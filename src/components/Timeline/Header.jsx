@@ -1,88 +1,56 @@
-import React, { PureComponent } from 'react'
+import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
-
+import { globalContext } from '../../index'
 import Timebar from './Timebar'
 
 const noop = () => { }
 
-class Header extends PureComponent {
-  constructor(props) {
-    super(props)
+const Header = ({ onMove, onEnter, onLeave, sticky }) => {
+  const { timebar, time } = useContext(globalContext)
+  const { isSticky, headerHeight, viewportWidth, scrollLeft, setHeaderHeight, handleHeaderScrollY } = sticky
 
-    this.scroll = React.createRef()
-    this.timebar = React.createRef()
-  }
+  const scroll = React.createRef()
+  const refTimebar = React.createRef()
 
-  componentDidMount() {
-    const { sticky } = this.props
+  useEffect(() => {
     if (sticky) {
-      sticky.setHeaderHeight(this.timebar.current.offsetHeight)
-      const { scrollLeft, isSticky } = sticky
+      setHeaderHeight(refTimebar.current.offsetHeight)
       if (isSticky) {
-        this.scroll.current.scrollLeft = scrollLeft
+        scroll.current.scrollLeft = scrollLeft
       }
     }
+  }, [sticky])
+
+  const handleScroll = () => {
+    handleHeaderScrollY(scroll.current.scrollLeft)
   }
 
-  componentDidUpdate(prevProps) {
-    const { sticky } = this.props
-    if (sticky) {
-      const { scrollLeft, isSticky } = sticky
-      const prevScrollLeft = prevProps.sticky.scrollLeft
-      const prevIsSticky = prevProps.sticky.isSticky
-      if (scrollLeft !== prevScrollLeft || isSticky !== prevIsSticky) {
-        this.scroll.current.scrollLeft = scrollLeft
-      }
-    }
-  }
-
-  handleScroll = () => {
-    const { sticky } = this.props
-    sticky.handleHeaderScrollY(this.scroll.current.scrollLeft)
-  }
-
-  render() {
-    const {
-      onMove,
-      onEnter,
-      onLeave,
-      width,
-      timebar: rows,
-      sticky: { isSticky, headerHeight, viewportWidth } = {},
-    } = this.props
-    return (
+  return (
+    <div
+      style={isSticky ? { paddingTop: headerHeight } : {}}
+      onMouseMove={onMove}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
       <div
-        style={isSticky ? { paddingTop: headerHeight } : {}}
-        onMouseMove={onMove}
-        onMouseEnter={onEnter}
-        onMouseLeave={onLeave}
+        className={`rt-timeline__header ${isSticky ? 'rt-is-sticky' : ''}`}
+        style={isSticky ? { width: viewportWidth, height: headerHeight } : {}}
       >
-        <div
-          className={`rt-timeline__header ${isSticky ? 'rt-is-sticky' : ''}`}
-          style={isSticky ? { width: viewportWidth, height: headerHeight } : {}}
-        >
-          <div className="rt-timeline__header-scroll" ref={this.scroll} onScroll={isSticky ? this.handleScroll : noop}>
-            <div ref={this.timebar} style={isSticky ? { width } : {}}>
-              <Timebar rows={rows} />
-            </div>
+        <div className="rt-timeline__header-scroll" ref={scroll} onScroll={isSticky ? handleScroll : noop}>
+          <div ref={refTimebar} style={isSticky ? { width: time.timelineWidthStyle } : {}}>
+            <Timebar rows={timebar} />
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+
 }
 
 Header.propTypes = {
-  timebar: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string,
-    }).isRequired
-  ).isRequired,
   onMove: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onLeave: PropTypes.func.isRequired,
-  width: PropTypes.string.isRequired,
   sticky: PropTypes.shape({
     isSticky: PropTypes.bool.isRequired,
     setHeaderHeight: PropTypes.func.isRequired,
