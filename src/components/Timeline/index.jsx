@@ -9,8 +9,7 @@ import { globalContext } from '../../index'
 import Tracks from './Tracks'
 import getGrid from '../../utils/getGrid'
 
-const Timeline = props => {
-  const { sticky } = props
+const Timeline = () => {
   const { now, time, tracks, timebar } = useContext(globalContext)
   const grid = getGrid(timebar)
   const [pointerDate, setPointerDate] = useState(null)
@@ -40,7 +39,6 @@ const Timeline = props => {
         onMove={handleMouseMove}
         onEnter={handleMouseEnter}
         onLeave={handleMouseLeave}
-        sticky={sticky}
       />
       <div className="rt-timeline__body">
         <div className="rt-grid">
@@ -52,10 +50,6 @@ const Timeline = props => {
       </div>
     </div>
   )
-}
-
-Timeline.propTypes = {
-  sticky: PropTypes.shape({}),
 }
 
 export default Timeline

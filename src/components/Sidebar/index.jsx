@@ -4,11 +4,11 @@ import TrackKeys from './TrackKeys'
 import { globalContext } from '../../index'
 
 const Sidebar = ({ sticky }) => {
-  const { isSticky, sidebarWidth, headerHeight } = sticky
-  const { tracks, timebar } = useContext(globalContext)
+  const { isSticky, headerHeight } = sticky
+  const { tracks, timebar, sidebarWidth } = useContext(globalContext)
   return (
     <div className="rt-sidebar">
-      <div style={isSticky ? { paddingTop: headerHeight } : {}}>
+      <div style={{ paddingTop: isSticky ? headerHeight : '' }}>
         <div
           className={`rt-sidebar__header ${isSticky ? 'rt-is-sticky' : ''}`}
           style={isSticky ? { width: sidebarWidth } : {}}

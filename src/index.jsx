@@ -11,18 +11,15 @@ function Gantt({
   scale,
   tracks,
   now,
-  headWidth,
   toggleTrackOpen,
   enableSticky = false,
+  sidebarWidth = 120,
   scrollToNow,
   clickElement,
   clickTrackButton
 }) {
-
   const { start, end, zoom, zoomMin, zoomMax } = scale
   const [time, setTime] = useState(createTime({ ...scale, viewportWidth: 0 }))
-  const [timelineViewportWidth, setTimelineViewportWidth] = useState(0)
-  const [sidebarWidth, setSidebarWidth] = useState(0)
 
   const buildMonthCells = () => {
     const v = []
@@ -106,33 +103,27 @@ function Gantt({
   ]
 
   useEffect(() => {
-    if (timelineViewportWidth && sidebarWidth) {
-      handleLayoutChange(timelineViewportWidth, sidebarWidth)
-    }
+    handleLayoutChange()
   }, [scale])
 
-  const handleLayoutChange = (_timelineViewportWidth, _sidebarWidth) => {
+  const handleLayoutChange = () => {
     const new_time = createTime({
       ...scale,
-      viewportWidth: _timelineViewportWidth,
+      viewportWidth: 1000,
     })
 
     setTime(new_time)
-    setTimelineViewportWidth(_timelineViewportWidth)
-    setSidebarWidth(_sidebarWidth)
   }
 
   return (
     <div className="rt">
-      <globalContext.Provider value={{ toggleTrackOpen, clickTrackButton, now, headWidth, tracks, time, clickElement, timebar }}>
+      <globalContext.Provider value={{ toggleTrackOpen, clickTrackButton, now, sidebarWidth, tracks, time, clickElement, timebar }}>
         <Layout
           enableSticky={enableSticky}
           time={time}
           scrollToNow={scrollToNow}
           isOpen={isOpen}
           onLayoutChange={handleLayoutChange}
-          timelineViewportWidth={timelineViewportWidth}
-          sidebarWidth={sidebarWidth}
         />
       </globalContext.Provider>
     </div>
@@ -148,7 +139,7 @@ Gantt.propTypes = {
     zoomMax: PropTypes.number,
     minWidth: PropTypes.number,
   }),
-  headWidth: PropTypes.number,
+  sideWidth: PropTypes.number,
   isOpen: PropTypes.bool,
   toggleOpen: PropTypes.func,
   zoomIn: PropTypes.func,
