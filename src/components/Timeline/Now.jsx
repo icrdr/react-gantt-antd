@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import Marker from '.'
+import Marker from './Marker'
 import { globalContext } from '../../index'
 
 
@@ -14,7 +14,6 @@ const NowMarker = ({ visible }) => {
       </div>
     </Marker>
   )
-
 }
 
 NowMarker.propTypes = {
