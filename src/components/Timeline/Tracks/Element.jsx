@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import BasicElement from '../../Elements/Basic'
-import { nowContext } from '../../../index'
+import { globalContext } from '../../../index'
 const Element = props => {
   const { index, time, style, styleBase, title, start, end, classes, dataSet, tooltip, clickElement } = props
 
@@ -14,7 +14,7 @@ const Element = props => {
     ...time.toStyleLeftAndWidth(start, end),
     ...(clickElement ? { cursor: 'pointer' } : {}),
   }
-  const { now } = useContext(nowContext)
+  const { now } = useContext(globalContext)
 
   return (
     <div className="rt-track__element" style={{

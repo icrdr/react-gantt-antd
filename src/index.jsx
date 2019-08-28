@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 import Layout from './components/Layout'
 import createTime from './utils/time'
 
-export const nowContext = React.createContext();
+export const globalContext = React.createContext();
 
 function Gantt({
   isOpen = true,
   scale,
   tracks,
   now,
+  headWidth,
   toggleTrackOpen,
   enableSticky = false,
   scrollToNow,
@@ -46,7 +47,6 @@ function Gantt({
     }
     return v
   }
-
   const buildDayCells = () => {
     const v = []
     const start_floor = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0)
@@ -124,15 +124,13 @@ function Gantt({
 
   return (
     <div className="rt">
-      <nowContext.Provider value={{ now }}>
+      <globalContext.Provider value={{ now, headWidth, tracks, time }}>
         <Layout
           enableSticky={enableSticky}
-          now={now}
-          tracks={tracks}
           timebar={timebar}
+          time={time}
           toggleTrackOpen={toggleTrackOpen}
           scrollToNow={scrollToNow}
-          time={time}
           isOpen={isOpen}
           onLayoutChange={handleLayoutChange}
           timelineViewportWidth={timelineViewportWidth}
@@ -140,11 +138,10 @@ function Gantt({
           clickElement={clickElement}
           clickTrackButton={clickTrackButton}
         />
-      </nowContext.Provider>
+      </globalContext.Provider>
     </div>
   )
 }
-
 
 Gantt.propTypes = {
   scale: PropTypes.shape({
@@ -155,6 +152,7 @@ Gantt.propTypes = {
     zoomMax: PropTypes.number,
     minWidth: PropTypes.number,
   }),
+  headWidth: PropTypes.number,
   isOpen: PropTypes.bool,
   toggleOpen: PropTypes.func,
   zoomIn: PropTypes.func,

@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import { globalContext } from '../../../index'
 
-const Grid = ({ time, grid }) => (
-  <div className="rt-grid">
-    {grid.map(({ id, start, end }) => (
-      <div key={id} className="rt-grid__cell" style={time.toStyleLeftAndWidth(start, end)} />
-    ))}
-  </div>
-)
+const Grid = ({ grid }) => {
+  const { time } = useContext(globalContext)
+  return (
+    <div className="rt-grid">
+      {grid.map(({ id, start, end }) => (
+        <div key={id} className="rt-grid__cell" style={time.toStyleLeftAndWidth(start, end)} />
+      ))}
+    </div>
+  )
+}
 
 Grid.propTypes = {
-  time: PropTypes.shape({}).isRequired,
   grid: PropTypes.arrayOf(
     PropTypes.shape({
       start: PropTypes.instanceOf(Date).isRequired,

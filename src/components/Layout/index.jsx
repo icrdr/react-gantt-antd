@@ -126,9 +126,6 @@ class Layout extends PureComponent {
   render() {
     const {
       isOpen,
-      tracks,
-      now,
-      time,
       timebar,
       toggleTrackOpen,
       sidebarWidth,
@@ -143,7 +140,6 @@ class Layout extends PureComponent {
         <div className="rt-layout__side" ref={this.sidebar}>
           <Sidebar
             timebar={timebar}
-            tracks={tracks}
             toggleTrackOpen={toggleTrackOpen}
             sticky={{ isSticky, headerHeight, sidebarWidth }}
             clickTrackButton={clickTrackButton}
@@ -152,10 +148,7 @@ class Layout extends PureComponent {
         <div className="rt-layout__main">
           <div className="rt-layout__timeline" ref={this.timeline} onScroll={isSticky ? this.handleScrollX : noop}>
             <Timeline
-              now={now}
-              time={time}
               timebar={timebar}
-              tracks={tracks}
               sticky={{
                 isSticky,
                 setHeaderHeight: this.setHeaderHeight,
@@ -176,10 +169,8 @@ class Layout extends PureComponent {
 Layout.propTypes = {
   enableSticky: PropTypes.bool.isRequired,
   timebar: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  time: PropTypes.shape({}).isRequired,
-  tracks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  now: PropTypes.instanceOf(Date),
   isOpen: PropTypes.bool,
+  time: PropTypes.shape({}).isRequired,
   toggleTrackOpen: PropTypes.func,
   scrollToNow: PropTypes.bool,
   onLayoutChange: PropTypes.func.isRequired,

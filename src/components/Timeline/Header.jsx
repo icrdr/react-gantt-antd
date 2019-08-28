@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Timebar from './Timebar'
 
-const noop = () => {}
+const noop = () => { }
 
 class Header extends PureComponent {
   constructor(props) {
@@ -43,7 +43,6 @@ class Header extends PureComponent {
 
   render() {
     const {
-      time,
       onMove,
       onEnter,
       onLeave,
@@ -64,7 +63,7 @@ class Header extends PureComponent {
         >
           <div className="rt-timeline__header-scroll" ref={this.scroll} onScroll={isSticky ? this.handleScroll : noop}>
             <div ref={this.timebar} style={isSticky ? { width } : {}}>
-              <Timebar time={time} rows={rows} />
+              <Timebar rows={rows} />
             </div>
           </div>
         </div>
@@ -74,7 +73,6 @@ class Header extends PureComponent {
 }
 
 Header.propTypes = {
-  time: PropTypes.shape({}).isRequired,
   timebar: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
