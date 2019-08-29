@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { globalContext } from '../../index'
+
 import Tracks from './Tracks'
 import Element from './Element'
 
 const Track = ({ elements, isOpen, tracks }) => {
-  const { time, clickElement } = useContext(globalContext)
   return (
     <div className="tr-track">
       <div className="rt-track__elements">
         {elements
           .filter(({ start, end }) => end > start)
           .map((element, i) => (
-            <Element key={element.id} index={i} time={time} clickElement={clickElement} {...element} />
+            <Element key={element.id} index={i} {...element} />
           ))}
       </div>
       {isOpen && tracks && tracks.length > 0 && <Tracks tracks={tracks} />}

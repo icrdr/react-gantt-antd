@@ -14,8 +14,8 @@ import useEvent from '../hooks/useEvent'
 const noop = () => { }
 export const stickyContext = React.createContext();
 
-const Layout = ({ enableSticky, isOpen }) => {
-  const { now, time, tracks, timebar, sidebarWidth, scrollToNow, viewportWidth } = useContext(globalContext)
+const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
+  const { now, time, tracks } = useContext(globalContext)
   const refTimeline = useRef(null)
   const refScroll = useRef(null)
   const refTimebar = useRef(null)
@@ -49,7 +49,7 @@ const Layout = ({ enableSticky, isOpen }) => {
   }
 
   if (enableSticky) {
-    useEvent('scroll', handleScrollY, true, [isOpen])
+    useEvent('scroll', handleScrollY, true, [])
   }
 
   const handleMouseMove = e => {
@@ -74,7 +74,7 @@ const Layout = ({ enableSticky, isOpen }) => {
   }
 
   return (
-    <div className={`rt-layout ${isOpen ? 'rt-is-open' : ''}`}>
+    <div className={`rt-layout rt-is-open`}>
       <div className="rt-layout__side" style={{ width: sidebarWidth }}>
         <div className="rt-sidebar">
           <div style={{ paddingTop: isSticky ? headerHeight : '' }}>
@@ -109,7 +109,7 @@ const Layout = ({ enableSticky, isOpen }) => {
             >
               <div
                 className={`rt-timeline__header ${isSticky ? 'rt-is-sticky' : ''}`}
-                style={isSticky ? { width: viewportWidth, height: headerHeight } : {}}
+                style={isSticky ? { width: `calc(100% - ${sidebarWidth}px)`, height: headerHeight } : {}}
               >
                 <div className="rt-timeline__header-scroll" ref={refScroll} onScroll={isSticky ? handleScroll : noop}>
                   <div ref={refTimebar} style={isSticky ? { width: time.timelineWidthStyle } : {}}>
@@ -135,8 +135,6 @@ const Layout = ({ enableSticky, isOpen }) => {
 
 Layout.propTypes = {
   enableSticky: PropTypes.bool.isRequired,
-  isOpen: PropTypes.bool,
-  time: PropTypes.shape({}).isRequired,
   scrollToNow: PropTypes.bool,
 }
 

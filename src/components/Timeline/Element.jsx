@@ -2,25 +2,24 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import BasicElement from './Elements'
+import BasicElement from './BasicElement'
 import { globalContext } from '../../index'
-const Element = props => {
-  const { index, time, style, styleBase, title, start, end, classes, dataSet, tooltip, clickElement } = props
+const Element = ({ index, style, styleBase, title, start, end, classes, dataSet, tooltip }) => {
 
+  const { now, time, clickElement } = useContext(globalContext)
   const handleClick = () => {
-    clickElement(props)
+    clickElement({ index, style, styleBase, title, start, end, classes, dataSet, tooltip })
   }
   const elementStyle = {
     ...time.toStyleLeftAndWidth(start, end),
     ...(clickElement ? { cursor: 'pointer' } : {}),
   }
-  const { now } = useContext(globalContext)
 
   return (
     <div className="rt-track__element" style={{
       ...elementStyle,
       color: '#fff',
-    }} onClick={clickElement && handleClick && handleClick}>
+    }} onClick={clickElement && handleClick}>
       <div style={{
         position: 'absolute',
         width: '100%',
@@ -50,7 +49,6 @@ const Element = props => {
 }
 
 Element.propTypes = {
-  time: PropTypes.shape({}).isRequired,
   styleBase: PropTypes.shape({}),
   style: PropTypes.shape({}),
   classes: PropTypes.arrayOf(PropTypes.string.isRequired),

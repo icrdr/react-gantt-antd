@@ -1,6 +1,6 @@
 const MILLIS_IN_A_DAY = 24 * 60 * 60 * 1000
 
-const create = ({ start, end, zoom, viewportWidth = 0, minWidth = 400 }) => {
+const create = ({ start, end, zoom, viewportWidth, minWidth }) => {
   const duration = end - start
 
   const days = duration / MILLIS_IN_A_DAY

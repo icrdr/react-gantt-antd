@@ -6,20 +6,18 @@ import useEvent from './hooks/useEvent'
 export const globalContext = React.createContext();
 
 function Gantt({
-  isOpen = true,
-  scale,
+  start, end, zoom,
   tracks,
   now,
   toggleTrackOpen,
   enableSticky = false,
   sidebarWidth = 120,
+  minWidth = 400,
   scrollToNow,
   clickElement,
   clickTrackButton
 }) {
-  const { start, end, zoom } = scale
-  const [time, setTime] = useState(createTime({ ...scale, viewportWidth: 0 }))
-  const [viewportWidth, setViewportWidth] = useState(0)
+  const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
 
   const gantt = useRef(null)
 
@@ -105,29 +103,37 @@ function Gantt({
 
   useEffect(() => {
     setTime(createTime({
-      ...scale,
+      start, end, zoom,
       viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+      minWidth: minWidth - sidebarWidth
     }))
-    setViewportWidth(gantt.current.offsetWidth - sidebarWidth)
-  }, [scale])
+  }, [zoom])
 
   const handleResize = () => {
     setTime(createTime({
-      ...scale,
+      start, end, zoom,
       viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+      minWidth: minWidth - sidebarWidth
     }))
-    setViewportWidth(gantt.current.offsetWidth - sidebarWidth)
   }
-  useEvent('resize', handleResize, true, [scale])
+  useEvent('resize', handleResize, true, [zoom])
 
   return (
     <div className="rt" ref={gantt}>
-      <globalContext.Provider value={{ scale, viewportWidth, toggleTrackOpen, clickTrackButton, now, sidebarWidth, tracks, time, scrollToNow, clickElement, timebar }}>
+      <globalContext.Provider value={{
+        now,
+        tracks,
+        time,
+        scrollToNow,
+        clickElement,
+        toggleTrackOpen,
+        clickTrackButton,
+      }}>
         <Layout
           enableSticky={enableSticky}
-          time={time}
           scrollToNow={scrollToNow}
-          isOpen={isOpen}
+          timebar={timebar}
+          sidebarWidth={sidebarWidth}
         />
       </globalContext.Provider>
     </div>
@@ -135,21 +141,15 @@ function Gantt({
 }
 
 Gantt.propTypes = {
-  scale: PropTypes.shape({
-    start: PropTypes.instanceOf(Date).isRequired,
-    end: PropTypes.instanceOf(Date).isRequired,
-    zoom: PropTypes.number.isRequired,
-    minWidth: PropTypes.number,
-  }),
-  sideWidth: PropTypes.number,
-  isOpen: PropTypes.bool,
-  toggleOpen: PropTypes.func,
-  zoomIn: PropTypes.func,
-  zoomOut: PropTypes.func,
-  clickElement: PropTypes.func,
-  clickTrackButton: PropTypes.func,
+  start: PropTypes.instanceOf(Date).isRequired,
+  end: PropTypes.instanceOf(Date).isRequired,
   tracks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   now: PropTypes.instanceOf(Date),
+  zoom: PropTypes.number.isRequired,
+  minWidth: PropTypes.number,
+  sideWidth: PropTypes.number,
+  clickElement: PropTypes.func,
+  clickTrackButton: PropTypes.func,
   toggleTrackOpen: PropTypes.func,
   enableSticky: PropTypes.bool,
   scrollToNow: PropTypes.bool,
