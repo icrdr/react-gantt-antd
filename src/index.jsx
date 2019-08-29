@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-
 import Layout from './components/Layout'
 import createTime from './utils/time'
-
+import useEvent from './hooks/useEvent'
 export const globalContext = React.createContext();
 
 function Gantt({
@@ -18,8 +17,11 @@ function Gantt({
   clickElement,
   clickTrackButton
 }) {
-  const { start, end, zoom, zoomMin, zoomMax } = scale
+  const { start, end, zoom } = scale
   const [time, setTime] = useState(createTime({ ...scale, viewportWidth: 0 }))
+  const [viewportWidth, setViewportWidth] = useState(0)
+
+  const gantt = useRef(null)
 
   const buildMonthCells = () => {
     const v = []
@@ -98,32 +100,34 @@ function Gantt({
       id: 'days',
       title: '日期',
       cells: buildDayCells(),
-    },
-
+    }
   ]
 
   useEffect(() => {
-    handleLayoutChange()
+    setTime(createTime({
+      ...scale,
+      viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+    }))
+    setViewportWidth(gantt.current.offsetWidth - sidebarWidth)
   }, [scale])
 
-  const handleLayoutChange = () => {
-    const new_time = createTime({
+  const handleResize = () => {
+    setTime(createTime({
       ...scale,
-      viewportWidth: 1000,
-    })
-
-    setTime(new_time)
+      viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+    }))
+    setViewportWidth(gantt.current.offsetWidth - sidebarWidth)
   }
+  useEvent('resize', handleResize, true, [scale])
 
   return (
-    <div className="rt">
-      <globalContext.Provider value={{ toggleTrackOpen, clickTrackButton, now, sidebarWidth, tracks, time, clickElement, timebar }}>
+    <div className="rt" ref={gantt}>
+      <globalContext.Provider value={{ scale, viewportWidth, toggleTrackOpen, clickTrackButton, now, sidebarWidth, tracks, time, scrollToNow, clickElement, timebar }}>
         <Layout
           enableSticky={enableSticky}
           time={time}
           scrollToNow={scrollToNow}
           isOpen={isOpen}
-          onLayoutChange={handleLayoutChange}
         />
       </globalContext.Provider>
     </div>
@@ -135,8 +139,6 @@ Gantt.propTypes = {
     start: PropTypes.instanceOf(Date).isRequired,
     end: PropTypes.instanceOf(Date).isRequired,
     zoom: PropTypes.number.isRequired,
-    zoomMin: PropTypes.number,
-    zoomMax: PropTypes.number,
     minWidth: PropTypes.number,
   }),
   sideWidth: PropTypes.number,

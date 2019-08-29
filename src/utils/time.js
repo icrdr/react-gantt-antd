@@ -1,22 +1,27 @@
 const MILLIS_IN_A_DAY = 24 * 60 * 60 * 1000
 
-const create = ({ start, end, zoom, viewportWidth = 0, minWidth = 0 }) => {
+const create = ({ start, end, zoom, viewportWidth = 0, minWidth = 400 }) => {
   const duration = end - start
 
   const days = duration / MILLIS_IN_A_DAY
   const daysZoomWidth = days * zoom
 
   let timelineWidth
+  // if (daysZoomWidth > viewportWidth) {
+  //   timelineWidth = daysZoomWidth
+  // } else {
+  //   timelineWidth = viewportWidth
+  // }
 
-  if (daysZoomWidth > viewportWidth) {
-    timelineWidth = daysZoomWidth
-  } else {
-    timelineWidth = viewportWidth
-  }
+  // if (timelineWidth < minWidth) {
+  //   timelineWidth = minWidth
+  // }
 
-  if (timelineWidth < minWidth) {
-    timelineWidth = minWidth
-  }
+  timelineWidth = Math.max(minWidth, viewportWidth * zoom)
+
+  // console.log('daysZoomWidth  ' + daysZoomWidth)
+  // console.log('viewportWidth  ' + viewportWidth)
+  // console.log('timelineWidth  ' + timelineWidth)
 
   const timelineWidthStyle = `${timelineWidth}px`
 

@@ -13,7 +13,7 @@ const tracksById = fill(20).reduce((acc, i) => {
 }, {})
 
 export default function App() {
-  const [zoom, setZoom] = useState(5)
+  const [zoom, setZoom] = useState(4)
   const [tracks, setTracks] = useState(Object.values(tracksById))
 
   const handleToggleTrackOpen = track => {
@@ -29,16 +29,29 @@ export default function App() {
 
   return (
     <div>
+      <button onClick={() => setZoom(prevState => {
+        if (prevState < 10) {
+          return prevState + 1
+        } else {
+          return prevState
+        }
+      })}>放大</button>
+      <button onClick={() => setZoom(prevState => {
+        console.log(prevState)
+        if (prevState > 1) {
+          return prevState - 1
+        } else {
+          return prevState
+        }
+      })}>缩小</button>
       <Gantt
         scale={{
           start: new Date('2020-06-01 12:00:00'),
-          end: new Date('2022-10-01 12:00:00'),
+          end: new Date('2020-10-01 12:00:00'),
           zoom: zoom,
-          zoomMin: 2,
-          zoomMax: 10,
         }}
         tracks={tracks}
-        now={new Date('2021-06-01 12:00:00')}
+        now={new Date('2020-08-01 12:00:00')}
         clickElement={element => { }}
         clickTrackButton={track => { }}
         toggleTrackOpen={handleToggleTrackOpen}

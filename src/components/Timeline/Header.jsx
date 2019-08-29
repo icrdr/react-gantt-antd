@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { globalContext } from '../../index'
 import Timebar from './Timebar'
@@ -6,21 +6,19 @@ import { stickyContext } from '../Layout'
 const noop = () => { }
 
 const Header = ({ onMove, onEnter, onLeave }) => {
-  const { timebar, time } = useContext(globalContext)
+  const { timebar, time, viewportWidth } = useContext(globalContext)
   const { sticky } = useContext(stickyContext)
-  const { isSticky, headerHeight, viewportWidth, scrollLeft, setHeaderHeight, handleHeaderScrollY } = sticky
+  const { isSticky, headerHeight, scrollLeft, setHeaderHeight, handleHeaderScrollY } = sticky
 
-  const scroll = React.createRef()
-  const refTimebar = React.createRef()
+  const scroll = useRef(null)
+  const refTimebar = useRef(null)
 
   useEffect(() => {
     if (sticky) {
       setHeaderHeight(refTimebar.current.offsetHeight)
-      if (isSticky) {
-        scroll.current.scrollLeft = scrollLeft
-      }
+      scroll.current.scrollLeft = scrollLeft
     }
-  }, [scrollLeft])
+  }, [scrollLeft, scroll.current])
 
   const handleScroll = () => {
     handleHeaderScrollY(scroll.current.scrollLeft)
