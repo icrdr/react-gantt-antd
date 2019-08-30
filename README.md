@@ -69,17 +69,35 @@ export default App
 ```
 ## API
 ### Gantt
+| Property | value | default | Descriptions |
+| :-----:| :----: | :----: | :---- |
+| start | Date || The start date of the timeline |
+| end | Date || The start date of the timeline |
+| now | Date |new Date()| 'now' marker position |
+| zoom | Number |1| The scale of the timeline width |
+| projects | List |[]| The project list |
+| minWidth | Number |120| The min width of the timeline when resizing the window |
+| sideWidth | Number |400| The width of the sidebar |
+| clickTask | function || when click task element |
+| enableSticky | Bool |true| Determine whether the header is sticky or not |
+| scrollToNow | Bool |true| Determine whether to scroll to the now marker at first or not |
 
-| Property | value | Descriptions |
-| :-----:| :----: | :----: |
-| start | Date | The start date of the task |
-| end | Date | The start date of the task |
-| now | Date | The start date of the task |
-| zoom | Number | The start date of the task |
-| projects | Object | The start date of the task |
-| enableSticky | Bool | The start date of the task |
-| scrollToNow | Bool | The start date of the task |
-| scrollToNow | Bool | The start date of the task |
+### Project
+| Property | value | default | Descriptions |
+| :-----:| :----: | :----: | :---- |
+| id | String/Number || The id of the Project |
+| title | String/Element || The title of the Project |
+| tasks | List || All the tasks of the Project |
+| projects | List || All the sub projects of the Project |
+| isOpen | Bool |false| Determine whether the project is folded  not |
+
+### Task
+| Property | value | default | Descriptions |
+| :-----:| :----: | :----: | :---- |
+| id | String/Number || The id of the Task |
+| title | String/Element || The title of the Task |
+| start | Date || The start date of the Task |
+| end | Date || The start date of the Task |
 
 ## Development
 

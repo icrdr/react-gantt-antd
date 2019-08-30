@@ -6,14 +6,15 @@ import useEvent from './hooks/useEvent'
 export const globalContext = React.createContext();
 
 function Gantt({
-  start, end, zoom,
-  projects,
-  now,
+  start, end,
+  zoom = 1,
+  projects = [],
+  now = new Date(),
   sidebarWidth = 120,
   minWidth = 400,
   scrollToNow = true,
   enableSticky = true,
-  clickElement,
+  clickTask,
 }) {
   const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
   const [_projects, setProjects] = useState(projects)
@@ -133,7 +134,7 @@ function Gantt({
       <globalContext.Provider value={{
         now,
         time,
-        clickElement,
+        clickTask,
         toggleProjectOpen,
       }}>
         <Layout
@@ -156,7 +157,7 @@ Gantt.propTypes = {
   projects: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   minWidth: PropTypes.number,
   sideWidth: PropTypes.number,
-  clickElement: PropTypes.func,
+  clickTask: PropTypes.func,
   enableSticky: PropTypes.bool,
   scrollToNow: PropTypes.bool,
 }
