@@ -113,19 +113,17 @@ function Gantt({
   ]
 
   useEffect(() => {
-    setTime(createTime({
-      start, end, zoom,
-      viewportWidth: gantt.current.offsetWidth - sidebarWidth,
-      minWidth: minWidth - sidebarWidth
-    }))
+    handleResize()
   }, [zoom, start, end])
 
   const handleResize = () => {
-    setTime(createTime({
-      start, end, zoom,
-      viewportWidth: gantt.current.offsetWidth - sidebarWidth,
-      minWidth: minWidth - sidebarWidth
-    }))
+    if (gantt.current) {
+      setTime(createTime({
+        start, end, zoom,
+        viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+        minWidth: minWidth - sidebarWidth
+      }))
+    }
   }
   useEvent('resize', handleResize)
 

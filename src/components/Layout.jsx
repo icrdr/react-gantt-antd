@@ -33,13 +33,13 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
   }
 
   useEffect(() => {
-    if (isSticky) {
+    if (isSticky && refScroll.current && refTimeline.current) {
       refScroll.current.scrollLeft = refTimeline.current.scrollLeft
     }
   }, [isSticky])
 
   useEffect(() => {
-    if (scrollToNow) {
+    if (scrollToNow && refTimeline.current) {
       refTimeline.current.scrollLeft = time.toX(now) - 0.5 * refTimeline.current.offsetWidth
     }
   }, [refTimeline.current])
@@ -76,12 +76,17 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
   }
 
   const handleScrollBody = () => {
-    refScroll.current.scrollLeft = refTimeline.current.scrollLeft
+    if (refTimeline.current && refScroll.current) {
+      refScroll.current.scrollLeft = refTimeline.current.scrollLeft
+    }
+
   }
 
 
   const handleScrollHeader = () => {
-    refTimeline.current.scrollLeft = refScroll.current.scrollLeft
+    if (refTimeline.current && refScroll.current) {
+      refTimeline.current.scrollLeft = refScroll.current.scrollLeft
+    }
   }
 
   return (
