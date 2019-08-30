@@ -7,7 +7,7 @@
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "3.0.1",
-    "react-timelines": "link:.."
+    "react-gantt-antd": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",
