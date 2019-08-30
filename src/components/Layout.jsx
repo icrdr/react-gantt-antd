@@ -44,10 +44,6 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, tracks }) =>
     }
   }, [refTimeline.current])
 
-  // useEffect(() => {
-
-  // }, [refTimeline.current.scrollLeft])
-
 
   const handleScroll = () => {
     const { top, bottom } = refTimeline.current.getBoundingClientRect()

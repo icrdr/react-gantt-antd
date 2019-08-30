@@ -1,7 +1,4 @@
 /* eslint-disable no-bitwise */
-
-import { MONTHS_PER_YEAR } from './constants'
-
 export const fill = n => {
   const arr = []
   for (let i = 0; i < n; i += 1) {
@@ -20,25 +17,6 @@ export const nextColor = () => {
   return COLORS[color]
 }
 
-// let prevColor = null
-// export const nextRandomColor = () => {
-//   let c = randomColor()
-//   while (c === prevColor) {
-//     c = randomColor()
-//   }
-//   prevColor = c
-//   return c
-// }
-
-// export const randomColor = () => {
-//   const LETTERS = '0123456789ABCDEF'
-//   let color = ''
-//   for (let i = 0; i < 6; i += 1) {
-//     color += LETTERS[Math.floor(Math.random() * 16)]
-//   }
-//   return color
-// }
-
 export const hexToRgb = hex => {
   const v = parseInt(hex, 16)
   const r = (v >> 16) & 255
@@ -55,8 +33,8 @@ export const colourIsLight = (r, g, b) => {
 export const addMonthsToYear = (year, monthsToAdd) => {
   let y = year
   let m = monthsToAdd
-  while (m >= MONTHS_PER_YEAR) {
-    m -= MONTHS_PER_YEAR
+  while (m >= 12) {
+    m -= 12
     y += 1
   }
   return { year: y, month: m + 1 }

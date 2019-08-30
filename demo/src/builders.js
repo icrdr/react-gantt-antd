@@ -1,54 +1,16 @@
 import React from 'react'
 
-import {
-  START_YEAR,
-  NUM_OF_YEARS,
-  MONTH_NAMES,
-  MONTHS_PER_YEAR,
-  QUARTERS_PER_YEAR,
-  MONTHS_PER_QUARTER,
-  NUM_OF_MONTHS,
-  MAX_TRACK_START_GAP,
-  MAX_ELEMENT_GAP,
-  MAX_MONTH_SPAN,
-  MIN_MONTH_SPAN,
-  MAX_NUM_OF_SUBTRACKS,
-} from './constants'
+import { fill, hexToRgb, colourIsLight, addMonthsToYearAsDate, nextColor, randomTitle } from './utils'
 
-import { fill, hexToRgb, colourIsLight, addMonthsToYear, addMonthsToYearAsDate, nextColor, randomTitle } from './utils'
-
-export const buildQuarterCells = () => {
-  const v = []
-  for (let i = 0; i < QUARTERS_PER_YEAR * NUM_OF_YEARS; i += 1) {
-    const quarter = (i % 4) + 1
-    const startMonth = i * MONTHS_PER_QUARTER
-    const s = addMonthsToYear(START_YEAR, startMonth)
-    const e = addMonthsToYear(START_YEAR, startMonth + MONTHS_PER_QUARTER)
-    v.push({
-      id: `${s.year}-q${quarter}`,
-      title: `Q${quarter} ${s.year}`,
-      start: new Date(`${s.year}-${s.month}-01`),
-      end: new Date(`${e.year}-${e.month}-01`),
-    })
-  }
-  return v
-}
-
-export const buildMonthCells = () => {
-  const v = []
-  for (let i = 0; i < MONTHS_PER_YEAR * NUM_OF_YEARS; i += 1) {
-    const startMonth = i
-    const start = addMonthsToYearAsDate(START_YEAR, startMonth)
-    const end = addMonthsToYearAsDate(START_YEAR, startMonth + 1)
-    v.push({
-      id: `m${startMonth}`,
-      title: MONTH_NAMES[i % 12],
-      start,
-      end,
-    })
-  }
-  return v
-}
+const START_YEAR = 2020
+const NUM_OF_YEARS = 1
+const MONTHS_PER_YEAR = 12
+const NUM_OF_MONTHS = NUM_OF_YEARS * MONTHS_PER_YEAR
+const MAX_TRACK_START_GAP = 1
+const MAX_ELEMENT_GAP = 8
+const MAX_MONTH_SPAN = 2
+const MIN_MONTH_SPAN = 1
+const MAX_NUM_OF_SUBTRACKS = 5
 
 export const buildElement = ({ trackId, start, end, i }) => {
   const bgColor = nextColor()
@@ -59,15 +21,14 @@ export const buildElement = ({ trackId, start, end, i }) => {
     start,
     end,
     style: {
+      bgColor,
       color,
-      textTransform: 'capitalize',
     },
   }
 }
 
 export const buildTrackStartGap = () => Math.floor(Math.random() * MAX_TRACK_START_GAP)
 export const buildElementGap = () => Math.floor(Math.random() * MAX_ELEMENT_GAP)
-
 export const buildElements = trackId => {
   const v = []
   let i = 1
@@ -100,7 +61,7 @@ export const buildElements = trackId => {
 
 export const buildSubtrack = (trackId, subtrackId) => ({
   id: `track-${trackId}-${subtrackId}`,
-  title: <p>{`Subtrack ${subtrackId}`}</p>,
+  title: <p>{`子任务 ${subtrackId}`}</p>,
   elements: buildElements(subtrackId),
 })
 
@@ -108,11 +69,9 @@ export const buildTrack = trackId => {
   const tracks = fill(Math.floor(Math.random() * MAX_NUM_OF_SUBTRACKS) + 1).map(i => buildSubtrack(trackId, i + 1))
   return {
     id: `track-${trackId}`,
-    title: <p>{`Track ${trackId}`}</p>,
+    title: <p>{`任务 ${trackId}`}</p>,
     elements: buildElements(trackId),
     tracks,
-    // hasButton: true,
-    // link: 'www.google.com',
     isOpen: false,
   }
 }

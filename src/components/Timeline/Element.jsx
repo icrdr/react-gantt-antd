@@ -30,7 +30,7 @@ const Element = ({ index, style, styleBase, title, start, end, classes, dataSet,
       }}></div>
       <div style={{
         position: 'absolute',
-        width: Math.max(0, Math.min(time.toX(end) - time.toX(start), time.toX(now) - time.toX(start))),
+        width: Math.max(0, Math.min(time.toX(end) - time.toX(start), time.toX(now) - time.toX(start))) || 0,
         height: '40px',
         backgroundColor: '#1890ff',
         filter: (index % 2 == 0) ? 'brightness(1.15)' : '',
