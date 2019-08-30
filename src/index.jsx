@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './components/Layout'
 import createTime from './utils/time'
@@ -113,10 +113,6 @@ function Gantt({
   ]
 
   useEffect(() => {
-    handleResize()
-  }, [zoom, start, end])
-
-  const handleResize = () => {
     if (gantt.current) {
       setTime(createTime({
         start, end, zoom,
@@ -124,7 +120,18 @@ function Gantt({
         minWidth: minWidth - sidebarWidth
       }))
     }
-  }
+  }, [zoom, start, end])
+
+  const handleResize = useCallback(() => {
+    if (gantt.current) {
+      setTime(createTime({
+        start, end, zoom,
+        viewportWidth: gantt.current.offsetWidth - sidebarWidth,
+        minWidth: minWidth - sidebarWidth
+      }))
+    }
+  })
+
   useEvent('resize', handleResize)
 
   return (

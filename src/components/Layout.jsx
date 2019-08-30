@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { globalContext } from '../index'
@@ -45,7 +45,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
   }, [refTimeline.current])
 
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (refTimeline.current) {
       const { top, bottom } = refTimeline.current.getBoundingClientRect()
       setSticky(top <= 0 && bottom >= headerHeight)
@@ -56,7 +56,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
         setShadow(true)
       }
     }
-  }
+  })
 
   if (enableSticky) {
     useEvent('scroll', handleScroll)
