@@ -1,14 +1,15 @@
 # React-gantt-antd
-A beautiful react gantt component with antd style. 
-This is a fork of [JSainsburyPLC/react-timelines](https://github.com/JSainsburyPLC/react-timelines)
+A beautiful react gantt component with antd style.  
+This is a fork of [JSainsburyPLC/react-timelines](https://github.com/JSainsburyPLC/react-timelines)  
 
+![snapshot](https://github.com/icrdr/react-gantt-antd/raw/master/img/1.jpg)
 
 ## Install
 
 ```sh
 yarn add react-gantt-antd
 ```
-## Usage
+## Example
 
 ```js
 import React from 'react'
@@ -55,9 +56,9 @@ export default function App() {
     <Gantt
       start={new Date('2020-06-01')}
       end={new Date('2020-10-01')}
+      now={new Date('2020-7-01')}
       zoom={1}
       projects={projects}
-      now={new Date('2020-7-01')}
       enableSticky
       scrollToNow
     />
@@ -66,6 +67,19 @@ export default function App() {
 
 export default App
 ```
+## API
+### Gantt
+
+| Property | value | Descriptions |
+| :-----:| :----: | :----: |
+| start | Date | The start date of the task |
+| end | Date | The start date of the task |
+| now | Date | The start date of the task |
+| zoom | Number | The start date of the task |
+| projects | Object | The start date of the task |
+| enableSticky | Bool | The start date of the task |
+| scrollToNow | Bool | The start date of the task |
+| scrollToNow | Bool | The start date of the task |
 
 ## Development
 
