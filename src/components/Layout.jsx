@@ -46,13 +46,15 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
 
 
   const handleScroll = () => {
-    const { top, bottom } = refTimeline.current.getBoundingClientRect()
-    setSticky(top <= 0 && bottom >= headerHeight)
+    if (refTimeline.current) {
+      const { top, bottom } = refTimeline.current.getBoundingClientRect()
+      setSticky(top <= 0 && bottom >= headerHeight)
 
-    if (refTimeline.current.scrollLeft === 0) {
-      setShadow(false)
-    } else {
-      setShadow(true)
+      if (refTimeline.current.scrollLeft === 0) {
+        setShadow(false)
+      } else {
+        setShadow(true)
+      }
     }
   }
 

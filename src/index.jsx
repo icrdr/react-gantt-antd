@@ -16,7 +16,7 @@ function Gantt({
   enableSticky = true,
   clickTask,
 }) {
-  const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
+  const [time, setTime] = useState(createTime(start, end, zoom, 0, minWidth))
   const [_projects, setProjects] = useState(projects)
 
   const toggleProjectOpen = project => {
@@ -118,7 +118,7 @@ function Gantt({
       viewportWidth: gantt.current.offsetWidth - sidebarWidth,
       minWidth: minWidth - sidebarWidth
     }))
-  }, [zoom])
+  }, [zoom, start, end])
 
   const handleResize = () => {
     setTime(createTime({
