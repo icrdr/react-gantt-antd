@@ -8,7 +8,7 @@ This is a fork of [JSainsburyPLC/react-timelines](https://github.com/JSainsburyP
 ```sh
 yarn add react-gantt-antd
 ```
-## Use
+## Usage
 
 ```js
 import React from 'react'
