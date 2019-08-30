@@ -42,7 +42,10 @@ const TrackKey = ({ track }) => {
 
 TrackKey.propTypes = {
   track: PropTypes.shape({
-    title: PropTypes.element.isRequired,
+    title: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]).isRequired,
     tracks: PropTypes.arrayOf(PropTypes.shape({})),
     isOpen: PropTypes.bool,
   }),

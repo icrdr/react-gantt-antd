@@ -1,18 +1,9 @@
-
-## Install
-
-```sh
-yarn add react-gantt-antd
-```
-## Use
-
-```js
 import React from 'react'
 import Gantt from 'react-gantt-antd'
 import 'react-gantt-antd/lib/css/style.css'
 
-export default function App() {
-    const elements_a = [
+export default function App2() {
+  const elements_a = [
     {
       id: "title1",
       title: "任务名称",
@@ -47,7 +38,6 @@ export default function App() {
       isOpen: false,
     }
   ]
-  
   return (
     <Gantt
       start={new Date('2020-06-01')}
@@ -60,20 +50,3 @@ export default function App() {
     />
   )
 }
-
-export default App
-```
-
-## Development
-
-```sh
-yarn install
-yarn watch
-yarn build
-```
-
-
-```
-npm config set registry=http://registry.npmjs.org
-npm config set registry=https://registry.npm.taobao.org/
-```

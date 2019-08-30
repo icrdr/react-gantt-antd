@@ -9,10 +9,10 @@ function Gantt({
   start, end, zoom,
   tracks,
   now,
-  enableSticky = false,
   sidebarWidth = 120,
   minWidth = 400,
-  scrollToNow,
+  scrollToNow = true,
+  enableSticky = true,
   clickElement,
 }) {
   const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
