@@ -57,7 +57,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) 
   }
 
   if (enableSticky) {
-    useEvent('scroll', handleScroll, true, [])
+    useEvent('scroll', handleScroll)
   }
 
   const handleMouseMove = e => {

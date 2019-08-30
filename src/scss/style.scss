@@ -24,9 +24,9 @@ $react-timelines-sidebar-key-icon-hover-color: #eee !default;
 // Timebar
 $react-timelines-timebar-cell-background-color: #fafafa;
 
-// Project / Elements
+// Project / Tasks
 $react-timelines-project-height: 60px !default;
-$react-timelines-element-spacing: $react-timelines-spacing !default;
+$react-timelines-task-spacing: $react-timelines-spacing !default;
 
 // Markers
 $react-timelines-marker-line-width: 2px !default;
@@ -56,7 +56,7 @@ $react-feather-color: #1890ff !default;
 @import 'utils';
 
 @import 'components/controls';
-@import 'components/element';
+@import 'components/task';
 @import 'components/grid';
 @import 'components/layout';
 @import 'components/marker';

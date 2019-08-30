@@ -1,25 +1,25 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-task-interactions */
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import BasicElement from './BasicElement'
+import TaskBasic from './TaskBasic'
 import { globalContext } from '../../index'
-const Element = ({ index, style, styleBase, title, start, end, classes, dataSet, tooltip }) => {
+const Task = ({ index, style, styleBase, title, start, end, classes, dataSet, tooltip }) => {
 
-  const { now, time, clickElement } = useContext(globalContext)
+  const { now, time, clickTask } = useContext(globalContext)
   const handleClick = () => {
-    clickElement({ index, style, styleBase, title, start, end, classes, dataSet, tooltip })
+    clickTask({ index, style, styleBase, title, start, end, classes, dataSet, tooltip })
   }
-  const elementStyle = {
+  const taskStyle = {
     ...time.toStyleLeftAndWidth(start, end),
-    ...(clickElement ? { cursor: 'pointer' } : {}),
+    ...(clickTask ? { cursor: 'pointer' } : {}),
   }
 
   return (
-    <div className="rt-project__element" style={{
-      ...elementStyle,
+    <div className="rt-project__task" style={{
+      ...taskStyle,
       color: '#fff',
-    }} onClick={clickElement && handleClick}>
+    }} onClick={clickTask && handleClick}>
       <div style={{
         position: 'absolute',
         width: '100%',
@@ -36,7 +36,7 @@ const Element = ({ index, style, styleBase, title, start, end, classes, dataSet,
         filter: (index % 2 == 0) ? 'brightness(1.15)' : '',
         ...style
       }}></div>
-      <BasicElement
+      <TaskBasic
         title={title}
         start={start}
         end={end}
@@ -48,7 +48,7 @@ const Element = ({ index, style, styleBase, title, start, end, classes, dataSet,
   )
 }
 
-Element.propTypes = {
+Task.propTypes = {
   styleBase: PropTypes.shape({}),
   style: PropTypes.shape({}),
   classes: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -60,11 +60,11 @@ Element.propTypes = {
   start: PropTypes.instanceOf(Date).isRequired,
   end: PropTypes.instanceOf(Date).isRequired,
   tooltip: PropTypes.string,
-  clickElement: PropTypes.func,
+  clickTask: PropTypes.func,
 }
 
-Element.defaultTypes = {
-  clickElement: undefined,
+Task.defaultTypes = {
+  clickTask: undefined,
 }
 
-export default Element
+export default Task

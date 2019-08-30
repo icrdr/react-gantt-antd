@@ -41,7 +41,7 @@ export default function App() {
           end={new Date('2020-10-01 12:00:00')}
           zoom={zoom}
           projects={projects}
-          now={new Date('2020-08-01 12:00:00')}
+          now={new Date('2020-08-07 12:00:00')}
           enableSticky
           scrollToNow
         />

@@ -12,11 +12,11 @@ const buildDataAttributes = (attributes = {}) => {
 }
 
 const Basic = ({ title, start, end, classes, dataSet, tooltip }) => (
-  <div className={createClasses('rt-element', classes)} {...buildDataAttributes(dataSet)}>
-    <div className="rt-element__content" aria-hidden="true">
-      <span className="rt-element__title">{title}</span>
+  <div className={createClasses('rt-task', classes)} {...buildDataAttributes(dataSet)}>
+    <div className="rt-task__content" aria-hidden="true">
+      <span className="rt-task__title">{title}</span>
     </div>
-    <div className="rt-element__tooltip">
+    <div className="rt-task__tooltip">
       {tooltip ? (
         // eslint-disable-next-line react/no-danger
         <div dangerouslySetInnerHTML={{ __html: tooltip.split('\n').join('<br>') }} />

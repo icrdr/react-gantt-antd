@@ -1,13 +1,13 @@
 .rt-project {}
 
-.rt-project__elements {
+.rt-project__tasks {
   position: relative;
   height: $react-timelines-project-height + $react-timelines-border-width;
   border-bottom: $react-timelines-border-width solid $react-timelines-keyline-color;
 }
 
-.rt-project__element {
+.rt-project__task {
   position: absolute;
-  height: $react-timelines-project-height - 2 * $react-timelines-element-spacing;
-  top: $react-timelines-element-spacing;
+  height: $react-timelines-project-height - 2 * $react-timelines-task-spacing;
+  top: $react-timelines-task-spacing;
 }

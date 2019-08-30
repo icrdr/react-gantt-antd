@@ -126,7 +126,7 @@ function Gantt({
       minWidth: minWidth - sidebarWidth
     }))
   }
-  useEvent('resize', handleResize, true, [zoom])
+  useEvent('resize', handleResize)
 
   return (
     <div className="rt" ref={gantt}>

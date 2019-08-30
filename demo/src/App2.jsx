@@ -3,7 +3,7 @@ import Gantt from 'react-gantt-antd'
 import 'react-gantt-antd/lib/css/style.css'
 
 export default function App2() {
-  const elements_a = [
+  const tasks_a = [
     {
       id: "title1",
       title: "任务名称",
@@ -12,7 +12,7 @@ export default function App2() {
     }
   ]
 
-  const elements_b = [
+  const tasks_b = [
     {
       id: "title1",
       title: "任务名称",
@@ -25,7 +25,7 @@ export default function App2() {
     {
       id: "sub_project1",
       title: "子项目",
-      elements: elements_b,
+      tasks: tasks_b,
     }
   ]
 
@@ -33,7 +33,7 @@ export default function App2() {
     {
       id: "project1",
       title: "项目1",
-      elements: elements_a,
+      tasks: tasks_a,
       projects: sub_projects,
       isOpen: false,
     }

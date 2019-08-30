@@ -1,3 +1,7 @@
+# React-gantt-antd
+A beautiful react gantt component with antd style. 
+This is a fork of [JSainsburyPLC/react-timelines](https://github.com/JSainsburyPLC/react-timelines)
+
 
 ## Install
 
@@ -12,7 +16,7 @@ import Gantt from 'react-gantt-antd'
 import 'react-gantt-antd/lib/css/style.css'
 
 export default function App() {
-    const elements_a = [
+  const tasks_a = [
     {
       id: "title1",
       title: "任务名称",
@@ -21,7 +25,7 @@ export default function App() {
     }
   ]
 
-  const elements_b = [
+  const tasks_b = [
     {
       id: "title1",
       title: "任务名称",
@@ -30,30 +34,29 @@ export default function App() {
     }
   ]
 
-  const subtasks = [
+  const sub_projects = [
     {
-      id: "subtask1",
+      id: "sub_project1",
       title: "子项目",
-      elements: elements_b,
+      tasks: tasks_b,
     }
   ]
 
-  const tracks = [
+  const projects = [
     {
-      id: "task1",
+      id: "project1",
       title: "项目1",
-      elements: elements_a,
-      tracks: subtasks,
+      tasks: tasks_a,
+      projects: sub_projects,
       isOpen: false,
     }
   ]
-  
   return (
     <Gantt
       start={new Date('2020-06-01')}
       end={new Date('2020-10-01')}
       zoom={1}
-      tracks={tracks}
+      projects={projects}
       now={new Date('2020-7-01')}
       enableSticky
       scrollToNow

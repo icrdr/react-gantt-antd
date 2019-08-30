@@ -1,5 +1,5 @@
-.rt-element {
-  $height: $react-timelines-project-height - 2 * $react-timelines-element-spacing;
+.rt-task {
+  $height: $react-timelines-project-height - 2 * $react-timelines-task-spacing;
 
   position: relative;
   height: $height;
@@ -7,14 +7,14 @@
   text-align: center;
 }
 
-.rt-element__content {
+.rt-task__content {
   padding: 0 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.rt-element__tooltip {
+.rt-task__tooltip {
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -41,8 +41,8 @@
   }
 }
 
-.rt-element:hover > .rt-element__tooltip,
-.rt-element:focus > .rt-element__tooltip {
+.rt-task:hover > .rt-task__tooltip,
+.rt-task:focus > .rt-task__tooltip {
   $delay: 0.3s;
   transform: translateX(-50%) scale(1);
   transition: transform 0s $delay;

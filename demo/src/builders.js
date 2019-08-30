@@ -10,7 +10,7 @@ const MAX_MONTH_SPAN = 2
 const MIN_MONTH_SPAN = 1
 const MAX_NUM_OF_SUBTRACKS = 5
 
-export const buildElement = ({ projectId, start, end, i }) => {
+export const buildTask = ({ projectId, start, end, i }) => {
   const bgColor = nextColor()
   const color = colourIsLight(...hexToRgb(bgColor)) ? '#000000' : '#ffffff'
   return {
@@ -26,8 +26,8 @@ export const buildElement = ({ projectId, start, end, i }) => {
 }
 
 export const buildProjectStartGap = () => Math.floor(Math.random() * MAX_TRACK_START_GAP)
-export const buildElementGap = () => Math.floor(Math.random() * MAX_ELEMENT_GAP)
-export const buildElements = projectId => {
+export const buildTaskGap = () => Math.floor(Math.random() * MAX_ELEMENT_GAP)
+export const buildTasks = projectId => {
   const v = []
   let i = 1
   let month = buildProjectStartGap()
@@ -42,14 +42,14 @@ export const buildElements = projectId => {
     const start = addMonthsToYearAsDate(START_YEAR, month)
     const end = addMonthsToYearAsDate(START_YEAR, month + monthSpan)
     v.push(
-      buildElement({
+      buildTask({
         projectId,
         start,
         end,
         i,
       })
     )
-    const gap = buildElementGap()
+    const gap = buildTaskGap()
     month += monthSpan + gap
     i += 1
   }
@@ -60,7 +60,7 @@ export const buildElements = projectId => {
 export const buildSubproject = (projectId, subprojectId) => ({
   id: `project-${projectId}-${subprojectId}`,
   title: `子项目 ${subprojectId}`,
-  elements: buildElements(subprojectId),
+  tasks: buildTasks(subprojectId),
 })
 
 export const buildProject = projectId => {
@@ -68,7 +68,7 @@ export const buildProject = projectId => {
   return {
     id: `project-${projectId}`,
     title: `项目 ${projectId}`,
-    elements: buildElements(projectId),
+    tasks: buildTasks(projectId),
     projects,
     isOpen: false,
   }

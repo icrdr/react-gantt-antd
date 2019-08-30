@@ -11,7 +11,7 @@ const ProjectKey = ({ project }) => {
 
   const buildSideComponent = () => {
     if (sideComponent) {
-      return React.cloneElement(sideComponent)
+      return React.cloneTask(sideComponent)
     }
     return null
   }
