@@ -9,15 +9,25 @@ function Gantt({
   start, end, zoom,
   tracks,
   now,
-  toggleTrackOpen,
   enableSticky = false,
   sidebarWidth = 120,
   minWidth = 400,
   scrollToNow,
   clickElement,
-  clickTrackButton
 }) {
   const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
+  const [_tracks, setTracks] = useState(tracks)
+
+  const toggleTrackOpen = track => {
+    setTracks(prevState => {
+      for (const _track of prevState) {
+        if (_track.id === track.id) {
+          _track.isOpen = !track.isOpen
+        }
+      }
+      return [...prevState]
+    })
+  }
 
   const gantt = useRef(null)
 
@@ -122,18 +132,16 @@ function Gantt({
     <div className="rt" ref={gantt}>
       <globalContext.Provider value={{
         now,
-        tracks,
         time,
-        scrollToNow,
         clickElement,
         toggleTrackOpen,
-        clickTrackButton,
       }}>
         <Layout
           enableSticky={enableSticky}
           scrollToNow={scrollToNow}
           timebar={timebar}
           sidebarWidth={sidebarWidth}
+          tracks={_tracks}
         />
       </globalContext.Provider>
     </div>
@@ -143,14 +151,12 @@ function Gantt({
 Gantt.propTypes = {
   start: PropTypes.instanceOf(Date).isRequired,
   end: PropTypes.instanceOf(Date).isRequired,
-  tracks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   now: PropTypes.instanceOf(Date),
   zoom: PropTypes.number.isRequired,
+  tracks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   minWidth: PropTypes.number,
   sideWidth: PropTypes.number,
   clickElement: PropTypes.func,
-  clickTrackButton: PropTypes.func,
-  toggleTrackOpen: PropTypes.func,
   enableSticky: PropTypes.bool,
   scrollToNow: PropTypes.bool,
 }

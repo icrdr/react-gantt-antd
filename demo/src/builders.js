@@ -50,22 +50,6 @@ export const buildMonthCells = () => {
   return v
 }
 
-export const buildTimebar = () => [
-  {
-    id: 'quarters',
-    title: 'Quarters',
-    cells: buildQuarterCells(),
-    style: {},
-  },
-  {
-    id: 'months',
-    title: 'Months',
-    cells: buildMonthCells(),
-    useAsGrid: true,
-    style: {},
-  },
-]
-
 export const buildElement = ({ trackId, start, end, i }) => {
   const bgColor = nextColor()
   const color = colourIsLight(...hexToRgb(bgColor)) ? '#000000' : '#ffffff'
@@ -75,10 +59,7 @@ export const buildElement = ({ trackId, start, end, i }) => {
     start,
     end,
     style: {
-      backgroundColor: `#${bgColor}`,
       color,
-      borderRadius: '4px',
-      boxShadow: '1px 1px 0px rgba(0, 0, 0, 0.25)',
       textTransform: 'capitalize',
     },
   }
@@ -119,7 +100,7 @@ export const buildElements = trackId => {
 
 export const buildSubtrack = (trackId, subtrackId) => ({
   id: `track-${trackId}-${subtrackId}`,
-  title: `Subtrack ${subtrackId}`,
+  title: <p>{`Subtrack ${subtrackId}`}</p>,
   elements: buildElements(subtrackId),
 })
 

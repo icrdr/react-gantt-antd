@@ -1,5 +1,3 @@
-.rt-track-key {}
-
 .rt-track-key__entry {
   display: flex;
   flex-direction: row;
@@ -9,6 +7,10 @@
   line-height: $react-timelines-track-height;
   text-align: left;
   border-bottom: $react-timelines-border-width solid $react-timelines-sidebar-separator-color;
+}
+
+.rt-icon {
+  color: $react-feather-color;
 }
 
 .rt-track-keys > .rt-track-key >

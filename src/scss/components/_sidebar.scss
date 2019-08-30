@@ -1,5 +1,9 @@
 .rt-sidebar {
   background-color: $react-timelines-sidebar-background-color;
+  border-right: 1px solid $react-timelines-sidebar-separator-color
+}
+
+.rt-sidebar.rt-sidebar-shadow {
   box-shadow: 10px 0 10px -5px rgba(12, 12, 12, 0.1);
 }
 
@@ -14,7 +18,7 @@
   z-index: 2;
   direction: rtl;
   margin-left: ($react-timelines-sidebar-width - $react-timelines-sidebar-closed-offset);
-
+  border-right: 1px solid $react-timelines-sidebar-separator-color;
   @media (min-width: $react-timelines-auto-open-breakpoint) {
     margin-left: 0;
     direction: ltr;

@@ -14,18 +14,7 @@ const tracksById = fill(20).reduce((acc, i) => {
 
 export default function App() {
   const [zoom, setZoom] = useState(1)
-  const [tracks, setTracks] = useState(Object.values(tracksById))
-
-  const handleToggleTrackOpen = track => {
-    setTracks(state => {
-      for (const _track of state) {
-        if (_track.id === track.id) {
-          _track.isOpen = !track.isOpen
-        }
-      }
-      return [...state]
-    })
-  }
+  const tracks = Object.values(tracksById)
 
   return (
     <div>
@@ -51,8 +40,6 @@ export default function App() {
         tracks={tracks}
         now={new Date('2020-08-01 12:00:00')}
         clickElement={element => { }}
-        clickTrackButton={track => { }}
-        toggleTrackOpen={handleToggleTrackOpen}
         enableSticky
         scrollToNow
       />

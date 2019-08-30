@@ -14,14 +14,15 @@ import useEvent from '../hooks/useEvent'
 const noop = () => { }
 export const stickyContext = React.createContext();
 
-const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
-  const { now, time, tracks } = useContext(globalContext)
+const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, tracks }) => {
+  const { now, time } = useContext(globalContext)
   const refTimeline = useRef(null)
   const refScroll = useRef(null)
   const refTimebar = useRef(null)
 
   const grid = getGrid(timebar)
   const [isSticky, setSticky] = useState(false)
+  const [hasShadow, setShadow] = useState(true)
   const [pointerDate, setPointerDate] = useState(null)
   const [pointerVisible, setPointerVisible] = useState(false)
   const [pointerHighlighted, setPointerHighlighted] = useState(false)
@@ -43,13 +44,24 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
     }
   }, [refTimeline.current])
 
-  const handleScrollY = () => {
+  // useEffect(() => {
+
+  // }, [refTimeline.current.scrollLeft])
+
+
+  const handleScroll = () => {
     const { top, bottom } = refTimeline.current.getBoundingClientRect()
     setSticky(top <= 0 && bottom >= headerHeight)
+
+    if (refTimeline.current.scrollLeft === 0) {
+      setShadow(false)
+    } else {
+      setShadow(true)
+    }
   }
 
   if (enableSticky) {
-    useEvent('scroll', handleScrollY, true, [])
+    useEvent('scroll', handleScroll, true, [])
   }
 
   const handleMouseMove = e => {
@@ -65,24 +77,25 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
     setPointerVisible(true)
   }
 
-  const handleScrollX = () => {
+  const handleScrollBody = () => {
     refScroll.current.scrollLeft = refTimeline.current.scrollLeft
   }
 
-  const handleScroll = () => {
+
+  const handleScrollHeader = () => {
     refTimeline.current.scrollLeft = refScroll.current.scrollLeft
   }
 
   return (
     <div className={`rt-layout rt-is-open`}>
       <div className="rt-layout__side" style={{ width: sidebarWidth }}>
-        <div className="rt-sidebar">
+        <div className={`rt-sidebar ${hasShadow ? 'rt-sidebar-shadow' : ''}`}>
           <div style={{ paddingTop: isSticky ? headerHeight : '' }}>
             <div
               className={`rt-sidebar__header ${isSticky ? 'rt-is-sticky' : ''}`}
               style={isSticky ? { width: sidebarWidth } : {}}
             >
-              {timebar.map(({ id, title }) => (
+              {timebar.slice(1, 3).map(({ id, title }) => (
                 <div key={id} className="rt-timebar-key">
                   {title}
                 </div>
@@ -95,7 +108,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
         </div>
       </div>
       <div className="rt-layout__main" style={{ width: `calc(100% - ${sidebarWidth}px)` }}>
-        <div className="rt-layout__timeline" ref={refTimeline} onScroll={isSticky ? handleScrollX : noop}>
+        <div className="rt-layout__timeline" ref={refTimeline} onScroll={isSticky ? handleScrollBody : noop}>
           <div className="rt-timeline" style={{ width: time.timelineWidthStyle }}>
             {now && <NowMarker now={now} visible />}
             {pointerDate && (
@@ -111,9 +124,9 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth }) => {
                 className={`rt-timeline__header ${isSticky ? 'rt-is-sticky' : ''}`}
                 style={isSticky ? { width: `calc(100% - ${sidebarWidth}px)`, height: headerHeight } : {}}
               >
-                <div className="rt-timeline__header-scroll" ref={refScroll} onScroll={isSticky ? handleScroll : noop}>
+                <div className="rt-timeline__header-scroll" ref={refScroll} onScroll={isSticky ? handleScrollHeader : noop}>
                   <div ref={refTimebar} style={isSticky ? { width: time.timelineWidthStyle } : {}}>
-                    <Timebar rows={timebar} />
+                    <Timebar rows={timebar.slice(1, 3)} />
                   </div>
                 </div>
               </div>
