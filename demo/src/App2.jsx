@@ -21,20 +21,20 @@ export default function App2() {
     }
   ]
 
-  const subtasks = [
+  const sub_projects = [
     {
-      id: "subtask1",
+      id: "sub_project1",
       title: "子项目",
       elements: elements_b,
     }
   ]
 
-  const tracks = [
+  const projects = [
     {
-      id: "task1",
+      id: "project1",
       title: "项目1",
       elements: elements_a,
-      tracks: subtasks,
+      projects: sub_projects,
       isOpen: false,
     }
   ]
@@ -43,7 +43,7 @@ export default function App2() {
       start={new Date('2020-06-01')}
       end={new Date('2020-10-01')}
       zoom={1}
-      tracks={tracks}
+      projects={projects}
       now={new Date('2020-7-01')}
       enableSticky
       scrollToNow

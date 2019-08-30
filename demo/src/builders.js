@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { fill, hexToRgb, colourIsLight, addMonthsToYearAsDate, nextColor, randomTitle } from './utils'
 
 const START_YEAR = 2020
@@ -12,11 +10,11 @@ const MAX_MONTH_SPAN = 2
 const MIN_MONTH_SPAN = 1
 const MAX_NUM_OF_SUBTRACKS = 5
 
-export const buildElement = ({ trackId, start, end, i }) => {
+export const buildElement = ({ projectId, start, end, i }) => {
   const bgColor = nextColor()
   const color = colourIsLight(...hexToRgb(bgColor)) ? '#000000' : '#ffffff'
   return {
-    id: `t-${trackId}-el-${i}`,
+    id: `t-${projectId}-el-${i}`,
     title: randomTitle(),
     start,
     end,
@@ -27,12 +25,12 @@ export const buildElement = ({ trackId, start, end, i }) => {
   }
 }
 
-export const buildTrackStartGap = () => Math.floor(Math.random() * MAX_TRACK_START_GAP)
+export const buildProjectStartGap = () => Math.floor(Math.random() * MAX_TRACK_START_GAP)
 export const buildElementGap = () => Math.floor(Math.random() * MAX_ELEMENT_GAP)
-export const buildElements = trackId => {
+export const buildElements = projectId => {
   const v = []
   let i = 1
-  let month = buildTrackStartGap()
+  let month = buildProjectStartGap()
 
   while (month < NUM_OF_MONTHS) {
     let monthSpan = Math.floor(Math.random() * (MAX_MONTH_SPAN - (MIN_MONTH_SPAN - 1))) + MIN_MONTH_SPAN
@@ -45,7 +43,7 @@ export const buildElements = trackId => {
     const end = addMonthsToYearAsDate(START_YEAR, month + monthSpan)
     v.push(
       buildElement({
-        trackId,
+        projectId,
         start,
         end,
         i,
@@ -59,19 +57,19 @@ export const buildElements = trackId => {
   return v
 }
 
-export const buildSubtrack = (trackId, subtrackId) => ({
-  id: `track-${trackId}-${subtrackId}`,
-  title: <p>{`子任务 ${subtrackId}`}</p>,
-  elements: buildElements(subtrackId),
+export const buildSubproject = (projectId, subprojectId) => ({
+  id: `project-${projectId}-${subprojectId}`,
+  title: `子项目 ${subprojectId}`,
+  elements: buildElements(subprojectId),
 })
 
-export const buildTrack = trackId => {
-  const tracks = fill(Math.floor(Math.random() * MAX_NUM_OF_SUBTRACKS) + 1).map(i => buildSubtrack(trackId, i + 1))
+export const buildProject = projectId => {
+  const projects = fill(Math.floor(Math.random() * MAX_NUM_OF_SUBTRACKS) + 1).map(i => buildSubproject(projectId, i + 1))
   return {
-    id: `track-${trackId}`,
-    title: <p>{`任务 ${trackId}`}</p>,
-    elements: buildElements(trackId),
-    tracks,
+    id: `project-${projectId}`,
+    title: `项目 ${projectId}`,
+    elements: buildElements(projectId),
+    projects,
     isOpen: false,
   }
 }

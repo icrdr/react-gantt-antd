@@ -1,28 +1,28 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import Tracks from './Tracks'
+import Projects from './Projects'
 import Element from './Element'
 
-const Track = ({ elements, isOpen, tracks }) => {
+const Project = ({ elements, isOpen, projects }) => {
   return (
-    <div className="tr-track">
-      <div className="rt-track__elements">
+    <div className="tr-project">
+      <div className="rt-project__elements">
         {elements
           .filter(({ start, end }) => end > start)
           .map((element, i) => (
             <Element key={element.id} index={i} {...element} />
           ))}
       </div>
-      {isOpen && tracks && tracks.length > 0 && <Tracks tracks={tracks} />}
+      {isOpen && projects && projects.length > 0 && <Projects projects={projects} />}
     </div>
   )
 }
 
-Track.propTypes = {
+Project.propTypes = {
   isOpen: PropTypes.bool,
   elements: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  tracks: PropTypes.arrayOf(PropTypes.shape({})),
+  projects: PropTypes.arrayOf(PropTypes.shape({})),
 }
 
-export default Track
+export default Project

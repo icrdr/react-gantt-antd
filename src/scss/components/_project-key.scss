@@ -1,10 +1,10 @@
-.rt-track-key__entry {
+.rt-project-key__entry {
   display: flex;
   flex-direction: row;
   align-items: center;
 
-  height: $react-timelines-track-height + $react-timelines-border-width;
-  line-height: $react-timelines-track-height;
+  height: $react-timelines-project-height + $react-timelines-border-width;
+  line-height: $react-timelines-project-height;
   text-align: left;
   border-bottom: $react-timelines-border-width solid $react-timelines-sidebar-separator-color;
 }
@@ -13,51 +13,51 @@
   color: $react-feather-color;
 }
 
-.rt-track-keys > .rt-track-key >
-.rt-track-key__entry {
+.rt-project-keys > .rt-project-key >
+.rt-project-key__entry {
   padding-left: $react-timelines-sidebar-key-indent-width;
 }
 
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-key__entry  {
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-key__entry  {
   padding-left: $react-timelines-sidebar-key-indent-width * 2;
 }
 
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-key__entry {
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-key__entry {
   padding-left: $react-timelines-sidebar-key-indent-width * 3;
 }
 
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-key__entry {
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-key__entry {
   padding-left: $react-timelines-sidebar-key-indent-width * 4;
 }
 
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-keys > .rt-track-key >
-.rt-track-key__entry {
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-keys > .rt-project-key >
+.rt-project-key__entry {
   padding-left: $react-timelines-sidebar-key-indent-width * 5;
 }
 
-.rt-track-key__title {
+.rt-project-key__title {
   flex: 1;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.rt-track-key__side-button {
-  height: $react-timelines-track-height;
-  width: $react-timelines-track-height;
+.rt-project-key__side-button {
+  height: $react-timelines-project-height;
+  width: $react-timelines-project-height;
   color: transparent;
   background: transparent;
 

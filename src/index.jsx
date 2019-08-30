@@ -7,7 +7,7 @@ export const globalContext = React.createContext();
 
 function Gantt({
   start, end, zoom,
-  tracks,
+  projects,
   now,
   sidebarWidth = 120,
   minWidth = 400,
@@ -16,13 +16,13 @@ function Gantt({
   clickElement,
 }) {
   const [time, setTime] = useState(createTime(start, end, zoom, 0, 0))
-  const [_tracks, setTracks] = useState(tracks)
+  const [_projects, setProjects] = useState(projects)
 
-  const toggleTrackOpen = track => {
-    setTracks(prevState => {
-      for (const _track of prevState) {
-        if (_track.id === track.id) {
-          _track.isOpen = !track.isOpen
+  const toggleProjectOpen = project => {
+    setProjects(prevState => {
+      for (const _project of prevState) {
+        if (_project.id === project.id) {
+          _project.isOpen = !project.isOpen
         }
       }
       return [...prevState]
@@ -134,14 +134,14 @@ function Gantt({
         now,
         time,
         clickElement,
-        toggleTrackOpen,
+        toggleProjectOpen,
       }}>
         <Layout
           enableSticky={enableSticky}
           scrollToNow={scrollToNow}
           timebar={timebar}
           sidebarWidth={sidebarWidth}
-          tracks={_tracks}
+          projects={_projects}
         />
       </globalContext.Provider>
     </div>
@@ -153,7 +153,7 @@ Gantt.propTypes = {
   end: PropTypes.instanceOf(Date).isRequired,
   now: PropTypes.instanceOf(Date),
   zoom: PropTypes.number.isRequired,
-  tracks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  projects: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   minWidth: PropTypes.number,
   sideWidth: PropTypes.number,
   clickElement: PropTypes.func,

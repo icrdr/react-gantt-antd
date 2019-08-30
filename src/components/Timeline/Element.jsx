@@ -16,7 +16,7 @@ const Element = ({ index, style, styleBase, title, start, end, classes, dataSet,
   }
 
   return (
-    <div className="rt-track__element" style={{
+    <div className="rt-project__element" style={{
       ...elementStyle,
       color: '#fff',
     }} onClick={clickElement && handleClick}>

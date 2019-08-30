@@ -1,0 +1,13 @@
+.rt-project {}
+
+.rt-project__elements {
+  position: relative;
+  height: $react-timelines-project-height + $react-timelines-border-width;
+  border-bottom: $react-timelines-border-width solid $react-timelines-keyline-color;
+}
+
+.rt-project__element {
+  position: absolute;
+  height: $react-timelines-project-height - 2 * $react-timelines-element-spacing;
+  top: $react-timelines-element-spacing;
+}

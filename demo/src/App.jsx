@@ -5,18 +5,18 @@ import { Button } from 'antd'
 import Gantt from 'react-gantt-antd'
 import 'react-gantt-antd/lib/css/style.css'
 
-import { buildTrack } from './builders'
+import { buildProject } from './builders'
 import { fill } from './utils'
 
-const tracksById = fill(20).reduce((acc, i) => {
-  const track = buildTrack(i + 1)
-  acc[track.id] = track
+const projectsById = fill(20).reduce((acc, i) => {
+  const project = buildProject(i + 1)
+  acc[project.id] = project
   return acc
 }, {})
 
 export default function App() {
   const [zoom, setZoom] = useState(1)
-  const tracks = Object.values(tracksById)
+  const projects = Object.values(projectsById)
 
   return (
     <>
@@ -29,7 +29,6 @@ export default function App() {
           }
         })}>放大</Button>
         <Button onClick={() => setZoom(prevState => {
-          console.log(prevState)
           if (prevState > 1) {
             return prevState - 1
           } else {
@@ -41,7 +40,7 @@ export default function App() {
           start={new Date('2020-06-01 12:00:00')}
           end={new Date('2020-10-01 12:00:00')}
           zoom={zoom}
-          tracks={tracks}
+          projects={projects}
           now={new Date('2020-08-01 12:00:00')}
           enableSticky
           scrollToNow

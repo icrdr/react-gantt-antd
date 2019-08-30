@@ -2,19 +2,19 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { globalContext } from '../index'
-import TrackKeys from './Sidebar/TrackKeys'
+import ProjectKeys from './Sidebar/ProjectKeys'
 import Timebar from './Timeline/Timebar'
 import NowMarker from './Timeline/Now'
 import PointerMarker from './Timeline/Pointer'
 import getMouseX from '../utils/getMouseX'
-import Tracks from './Timeline/Tracks'
+import Projects from './Timeline/Projects'
 import getGrid from '../utils/getGrid'
 import useEvent from '../hooks/useEvent'
 
 const noop = () => { }
 export const stickyContext = React.createContext();
 
-const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, tracks }) => {
+const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, projects }) => {
   const { now, time } = useContext(globalContext)
   const refTimeline = useRef(null)
   const refScroll = useRef(null)
@@ -99,7 +99,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, tracks }) =>
             </div>
           </div>
           <div className="rt-sidebar__body">
-            <TrackKeys tracks={tracks} />
+            <ProjectKeys projects={projects} />
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@ const Layout = ({ enableSticky, scrollToNow, timebar, sidebarWidth, tracks }) =>
                   <div key={id} className="rt-grid__cell" style={time.toStyleLeftAndWidth(start, end)} />
                 ))}
               </div>
-              <Tracks tracks={tracks} />
+              <Projects projects={projects} />
             </div>
           </div>
         </div>

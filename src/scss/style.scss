@@ -24,8 +24,8 @@ $react-timelines-sidebar-key-icon-hover-color: #eee !default;
 // Timebar
 $react-timelines-timebar-cell-background-color: #fafafa;
 
-// Track / Elements
-$react-timelines-track-height: 60px !default;
+// Project / Elements
+$react-timelines-project-height: 60px !default;
 $react-timelines-element-spacing: $react-timelines-spacing !default;
 
 // Markers
@@ -64,7 +64,7 @@ $react-feather-color: #1890ff !default;
 @import 'components/timebar';
 @import 'components/timebar-key';
 @import 'components/timeline';
-@import 'components/track';
-@import 'components/tracks';
-@import 'components/track-key';
-@import 'components/track-keys';
+@import 'components/project';
+@import 'components/projects';
+@import 'components/project-key';
+@import 'components/project-keys';
